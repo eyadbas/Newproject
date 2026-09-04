@@ -255,7 +255,7 @@
       <div class="cert-name">CISSP®</div>
       <div class="cert-full">Certified Information Systems Security Professional — ISC2</div>
       <div class="cert-num">Cert #2851874</div>
-      <a href="certs/cissp.pdf" class="cert-btn" target="_blank">View Certificate</a>
+      <a href="https://eyadbas.github.io/e2ec9e9a-8b4e-4da7-adb5-b031bed3d2bf" class="cert-btn" target="_blank" rel="noopener noreferrer">View Certificate</a>
     </div>
     <div class="cert-card">
       <div class="cert-name">PMP®</div>
@@ -375,6 +375,12 @@
       const certCard = btn.closest('.cert-card');
       const certName = certCard.querySelector('.cert-name').textContent.toLowerCase();
       const originalHref = btn.getAttribute('href');
+
+      if (originalHref && originalHref.startsWith('http')) {
+        btn.onclick = null;
+        btn.setAttribute('target', '_blank');
+        return;
+      }
       
       let hasUploadedFile = false;
       
