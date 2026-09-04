@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eyad Basabrain — Senior Technical Program Manager</title>
+<style>
+  :root{
+      --charcoal:#14120f;
+          --charcoal-2:#1c1a15;
+              --gold:#c9a24b;
+                  --gold-bright:#e8c874;
+                      --ivory:#ede7d9;
+                          --muted:#9c9585;
+                              --line:#2c2820;
+                                }
+                                *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--charcoal);
+    color:var(--ivory);
+    font-family:'Georgia', 'Times New Roman', serif;
+    line-height:1.6;
+  }
+  .mono{font-family:'Courier New', monospace; letter-spacing:0.08em;}
+  header{
+    position:sticky; top:0; z-index:10;
+    background:rgba(20,18,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:1rem 2rem;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap;
+  }
+  header .brand{color:var(--gold); font-weight:bold; letter-spacing:0.12em; font-size:0.95rem;}
+  header .lang-switcher{display:flex;gap:.8rem;margin-right:auto;padding:0 1rem}
+  header .lang-switcher a{color:var(--muted);text-decoration:none;font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;transition:color .2s;border-bottom:1px solid transparent;padding-bottom:.2rem}
+  header .lang-switcher a.active{color:var(--gold-bright);border-bottom-color:var(--gold-bright)}
+  header .lang-switcher a:hover{color:var(--gold-bright)}
+  nav a{
+    color:var(--muted); text-decoration:none; margin-left:1.5rem;
+    font-size:0.85rem; text-transform:uppercase; letter-spacing:0.1em;
+    font-family:'Courier New', monospace;
+    transition:color 0.2s;
+  }
+  nav a:hover{color:var(--gold-bright);}
+  .hero{
+    padding:6rem 2rem 5rem;
+    max-width:920px; margin:0 auto;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-label{
+    color:var(--gold); font-family:'Courier New', monospace;
+    font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase;
+    margin-bottom:1.2rem;
+  }
+  .hero-title{
+    font-size:clamp(2.2rem, 5.5vw, 3.6rem);
+    font-weight:400;
+    color:var(--ivory);
+    line-height:1.15;
+    margin-bottom:0.8rem;
+  }
+  .hero-title em{color:var(--gold-bright); font-style:normal;}
+  .hero-sub{
+    color:var(--muted); font-size:1.1rem; max-width:660px;
+    margin-bottom:2rem;
+  }.hero-badges{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.2rem}.badge{border:1px solid var(--gold);color:var(--gold);padding:.35rem .9rem;font-size:.75rem;letter-spacing:.04em;border-radius:2px}.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}.hero-cta{display:inline-block;background:var(--gold);color:var(--charcoal);padding:.75rem 1.6rem;text-decoration:none;font-weight:bold;font-size:.9rem;border-radius:2px;transition:opacity .2s}.hero-cta:hover{opacity:.85}.hero-cta-outline{display:inline-block;border:1px solid var(--muted);color:var(--ivory);padding:.75rem 1.6rem;text-decoration:none;font-size:.9rem;border-radius:2px}.hero-cta-outline:hover{border-color:var(--gold);color:var(--gold-bright)}
+  section{padding:5rem 2rem; max-width:920px; margin:0 auto; border-bottom:1px solid var(--line);}
+  .section-label{
+    font-family:'Courier New', monospace; color:var(--gold);
+    font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase;
+    margin-bottom:0.6rem;
+  }
+  .section-title{font-size:1.9rem; color:var(--ivory); margin-bottom:2rem; font-weight:400;}.about-grid{display:grid;grid-template-columns:2fr 1fr;gap:3rem}.about-text p{color:var(--muted);margin-bottom:1rem;font-size:1rem}.about-stats{display:flex;flex-direction:column;gap:1.5rem}.stat-num{font-size:2rem;color:var(--gold-bright);font-family:Arial,sans-serif}.stat-label{color:var(--muted);font-size:.8rem}
+.edu-item{padding:1.2rem 0;border-top:1px solid var(--line)}.edu-item:first-of-type{border-top:none}.edu-degree{color:var(--gold-bright);font-size:1.05rem;margin-bottom:.2rem}.edu-school,.edu-subjects{color:var(--muted);font-size:.9rem}.edu-subjects{font-style:italic}.exp-item{display:grid;grid-template-columns:190px 1fr;gap:2rem;padding:2rem 0;border-top:1px solid var(--line)}.exp-item:first-of-type{border-top:none}.exp-period{color:var(--gold);font-size:.8rem}.exp-role{font-size:1.15rem;color:var(--ivory);margin-bottom:.3rem}.exp-org{color:var(--gold-bright);font-size:.92rem;margin-bottom:.8rem}.exp-desc{color:var(--muted);font-size:.92rem}.exp-desc li{margin-bottom:.4rem;list-style:none;padding-left:1rem;position:relative}.exp-desc li::before{content:"—";position:absolute;left:0;color:var(--gold)}.achieve-list{color:var(--muted);font-size:.98rem}.achieve-list li{margin-bottom:.7rem;list-style:none;padding-left:1.2rem;position:relative}.achieve-list li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:.8rem}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}.cert-card{border:1px solid var(--line);padding:1.2rem;border-radius:2px;display:flex;flex-direction:column;gap:.6rem}.cert-card:hover{border-color:var(--gold)}.cert-name{color:var(--gold-bright);font-weight:bold}.cert-full,.cert-num{color:var(--muted);font-size:.85rem}.cert-num{font-family:Arial,sans-serif;font-size:.75rem}.cert-btn{align-self:flex-start;margin-top:.4rem;border:1px solid var(--gold);color:var(--gold);padding:.4rem .9rem;font-size:.75rem;text-decoration:none;border-radius:2px;cursor:pointer}.cert-btn:hover{background:var(--gold);color:var(--charcoal)}.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.9rem}.project-card{border-left:2px solid var(--gold);padding:.6rem 1rem;color:var(--muted);font-size:.92rem}.skills-cloud{display:flex;flex-wrap:wrap;gap:.7rem}.skill-pill{border:1px solid var(--line);color:var(--ivory);padding:.5rem 1.1rem;border-radius:20px;font-size:.85rem}footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:.85rem}footer a{color:var(--gold);text-decoration:none}
+  .cert-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:1000;justify-content:center;align-items:center;}.cert-modal.active{display:flex;}.cert-modal-content{background:var(--charcoal);border:1px solid var(--line);border-radius:4px;max-width:90%;max-height:90vh;overflow:auto;position:relative;padding:2rem;}.cert-modal-close{position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:var(--muted);font-size:2rem;cursor:pointer;font-weight:bold;}.cert-modal-close:hover{color:var(--gold-bright);}.cert-modal iframe,.cert-modal img{width:100%;height:auto;max-height:75vh;}
+  @media (max-width:700px){
+    .about-grid{grid-template-columns:1fr;}
+    .exp-item{grid-template-columns:1fr; gap:0.5rem;}
+    header{padding:1rem;}
+    header .lang-switcher{margin-right:0;padding:0;order:3;width:100%;justify-content:flex-start;margin-top:.5rem}
+    nav{order:2}
+    nav a{margin-left:1rem; font-size:0.72rem;}
+    section{padding:3.5rem 1.2rem;}
+    .hero{padding:4rem 1.2rem 3rem;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">EYAD BASABRAIN</div>
+  <div class="lang-switcher"><a href="cv-en.html" class="active">EN</a><a href="cv-ar.html">AR</a></div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-label">Senior Technical Program Manager · PMO &amp; Digital Transformation Leader</div>
+  <h1 class="hero-title">Turning strategy into <em>execution</em> across government &amp; aviation</h1>
+  <p class="hero-sub">13+ years leading technology, infrastructure, and cybersecurity programs. Focused on PMO governance, delivery visibility, and cross-functional leadership — aligned with ISO 27001, NCA, COBIT, and PMI practices. Based in Riyadh, Saudi Arabia.</p>
+<div class="hero-badges"><span class="badge">EMBA</span><span class="badge">CISSP®</span><span class="badge">PMP®</span><span class="badge">PMI-ACP®</span><span class="badge">GRCP</span><span class="badge">GRCA</span><span class="badge">CCNP</span><span class="badge">KNX</span></div>
+  <div class="hero-ctas">
+    <a href="cv/Eyad-Basabrain-CV.pdf" class="hero-cta" target="_blank">Download CV (PDF)</a>
+    <a href="#contact" class="hero-cta-outline">Get in touch</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">Profile</div>
+  <h2 class="section-title">About</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a Technical Program and Project Manager with more than 13 years of experience leading technology, infrastructure, and cybersecurity initiatives across government and aviation sectors in Saudi Arabia.</p>
+      <p>I focus on turning strategy into execution — building strong PMO governance, improving delivery visibility, and leading cross-functional teams through complex programs. My background combines hands-on technical knowledge with program leadership aligned to ISO 27001, NCA, COBIT, and PMI practices.</p>
+      <p>Currently I lead the IT-PMO at the National Center of Vegetation Cover Development (NCVC), having built it from the ground up using a Build–Operate–Transfer approach grounded in international standards and frameworks.</p>
+    </div>
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">13+</div>
+        <div class="stat-label">Years experience</div>
+      </div>
+      <div>
+        <div class="stat-num">50M+</div>
+        <div class="stat-label">SAR in programs delivered</div>
+      </div>
+      <div>
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Infrastructure &amp; cybersecurity projects</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-label">Academic background</div>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-item">
+    <div class="edu-degree">Executive MBA</div>
+    <div class="edu-school">King Abdulaziz University</div>
+    <div class="edu-subjects">Project Management, Management of Information Systems, Economics, Corporate Finance, Managerial Accounting</div>
+  </div>
+  <div class="edu-item">
+    <div class="edu-degree">B.Sc. Electrical &amp; Computer Engineering</div>
+    <div class="edu-school">King Abdulaziz University</div>
+    <div class="edu-subjects">Engineering Design, Electrical Circuits, Electronics, Programming (Java, C#), Databases, Communication &amp; Network Engineering</div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label">Career</div>
+  <h2 class="section-title">Experience</h2>
+
+  <div class="exp-item">
+    <div class="exp-period">Jan 2024 — Present</div>
+    <div>
+      <div class="exp-role">IT Program Manager</div>
+      <div class="exp-org">National Center of Vegetation Cover Development (NCVC)</div>
+      <ul class="exp-desc">
+        <li>Built an IT-PMO from the ground up using a Build–Operate–Transfer approach, grounded in international standards and frameworks</li>
+        <li>Worked with executive leadership to drive digital transformation initiatives including GIS and AI programs</li>
+        <li>Introduced portfolio governance practices, improving prioritization and decision-making</li>
+        <li>Automated PMO reporting workflows and built Power BI dashboards for real-time delivery, risk, and budget visibility</li>
+        <li>Led preparation of SOWs and RFPs, supporting vendor evaluation and onboarding</li>
+        <li>Mentored team members in project management practices — several achieved PMP® certification as a result</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-period">Mar 2022 — Jan 2024</div>
+    <div>
+      <div class="exp-role">IT Project Manager</div>
+      <div class="exp-org">Wipro / Riyadh Airports</div>
+      <ul class="exp-desc">
+        <li>Managed infrastructure and cybersecurity projects supporting critical airport operations</li>
+        <li>Led modernization of enterprise networks to improve operational system availability</li>
+        <li>Coordinated engineering, cybersecurity, and vendor teams across complex environments</li>
+        <li>Delivered infrastructure migrations with zero operational downtime</li>
+        <li>Provided executive-level reporting on program progress, risks, and KPIs</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-period">Feb 2015 — Mar 2022</div>
+    <div>
+      <div class="exp-role">IT Project Manager / Network Specialist</div>
+      <div class="exp-org">National Water Company</div>
+      <ul class="exp-desc">
+        <li>Delivered enterprise Data Center and Disaster Recovery programs supporting critical services</li>
+        <li>Implemented IT/OT network separation, enhancing cybersecurity posture</li>
+        <li>Led modernization of network and security platforms across environments</li>
+        <li>Facilitated stakeholder workshops ensuring alignment and smooth delivery</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-period">Feb 2013 — Feb 2015</div>
+    <div>
+      <div class="exp-role">Network Engineer</div>
+      <div class="exp-org">ICAD</div>
+      <ul class="exp-desc">
+        <li>Implemented enterprise networking solutions supporting aviation operational systems</li>
+        <li>Configured routing, switching, and firewall environments for secure operations</li>
+        <li>Performed troubleshooting and root cause analysis for complex incidents</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-period">Sep 2011 — Feb 2013</div>
+    <div>
+      <div class="exp-role">Projects Engineer</div>
+      <div class="exp-org">Saudi Binladin Group</div>
+      <ul class="exp-desc">
+        <li>Delivered smart building and BMS solutions across major facilities</li>
+        <li>Led commissioning and system acceptance activities</li>
+        <li>Coordinated HVAC, electrical, and automation integrations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="section-label">Highlights</div>
+  <h2 class="section-title">Key Achievements</h2>
+  <ul class="achieve-list">
+    <li>Delivered and managed technology and infrastructure programs exceeding 50M+ SAR budgets</li>
+    <li>Successfully established an enterprise IT-PMO, improving governance and delivery maturity</li>
+    <li>Coached team members toward PMP® certification, strengthening overall delivery capability</li>
+    <li>Managed 20+ infrastructure and cybersecurity projects in mission-critical environments</li>
+    <li>Delivered enterprise Data Center and Disaster Recovery implementations</li>
+    <li>Led Digital Transformation initiatives including GIS, AI, and enterprise platforms</li>
+    <li>Implemented IT/OT segmentation, improving cybersecurity posture</li>
+    <li>Delivered infrastructure migrations with zero operational downtime</li>
+    <li>Built executive Power BI dashboards improving portfolio visibility</li>
+    <li>Led Agile software delivery projects including ERP, eCommerce, and mobile platforms</li>
+  </ul>
+</section>
+
+<section id="certifications">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications</h2>
+  <p style="color:var(--muted); margin-bottom:1.5rem; font-size:0.9rem;">Tap "View Certificate" to open the verified PDF.</p>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-name">CISSP®</div>
+      <div class="cert-full">Certified Information Systems Security Professional — ISC2</div>
+      <div class="cert-num">Cert #2851874</div>
+      <a href="certs/cissp.pdf" class="cert-btn" target="_blank">View Certificate</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">PMP®</div>
+      <div class="cert-full">Project Management Professional — PMI</div>
+      <div class="cert-num">Cert #2558722</div>
+      <a href="certs/pmp.pdf" class="cert-btn" target="_blank">View Certificate</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">PMI-ACP®</div>
+      <div class="cert-full">Agile Certified Practitioner — PMI</div>
+      <div class="cert-num">Cert #3369928</div>
+      <a href="certs/pmi-acp.pdf" class="cert-btn" target="_blank">View Certificate</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">GRCP</div>
+      <div class="cert-full">Certified GRC Professional — OCEG</div>
+      <div class="cert-num">Cert #179077139</div>
+      <a href="certs/grcp.pdf" class="cert-btn" target="_blank">View Certificate</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">GRCA</div>
+      <div class="cert-full">Certified GRC Auditor — OCEG</div>
+      <div class="cert-num">Cert #179224276</div>
+      <a href="certs/grca.pdf" class="cert-btn" target="_blank">View Certificate</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">CCNP</div>
+      <div class="cert-full">Cisco Certified Network Professional</div>
+      <a href="certs/ccnp.pdf" class="cert-btn" target="_blank">View Certificate</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">KNX</div>
+      <div class="cert-full">Smart Home Electrical Engineering</div>
+      <a href="certs/knx.pdf" class="cert-btn" target="_blank">View Certificate</a>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">Delivered</div>
+  <h2 class="section-title">Core Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">Enterprise IT-PMO Establishment — NCVC</div>
+    <div class="project-card">Digital Transformation Portfolio (GIS &amp; AI Programs)</div>
+    <div class="project-card">Riyadh Airports Enterprise Network Modernization</div>
+    <div class="project-card">AF8 Data Center Deployment — Riyadh Airports</div>
+    <div class="project-card">KKIA Operational Network Enhancement</div>
+    <div class="project-card">NWC Primary Data Center Deployment</div>
+    <div class="project-card">NWC Disaster Recovery Data Center</div>
+    <div class="project-card">NWC West Region Network Upgrade</div>
+    <div class="project-card">Operational Technology Network Segmentation — NWC</div>
+    <div class="project-card">New KAIA Airport Network Implementation</div>
+    <div class="project-card">Smart UPS Deployment for Critical Network Switches</div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Focus areas</div>
+  <h2 class="section-title">Core Skills</h2>
+  <div class="skills-cloud">
+    <span class="skill-pill">Technical Program Management</span>
+    <span class="skill-pill">PMO Establishment &amp; Governance</span>
+    <span class="skill-pill">Digital Transformation</span>
+    <span class="skill-pill">Cybersecurity &amp; Infrastructure Programs</span>
+    <span class="skill-pill">Portfolio &amp; Risk Management</span>
+    <span class="skill-pill">Agile &amp; Waterfall Delivery</span>
+    <span class="skill-pill">Stakeholder &amp; Vendor Management</span>
+    <span class="skill-pill">Power BI &amp; Executive Reporting</span>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Let's connect</div>
+  <h2 class="section-title">Contact</h2>
+  <p style="color:var(--muted); margin-bottom:1.5rem;">Riyadh, Saudi Arabia · Saudi National · Open to conversations on program management, cybersecurity governance, and digital transformation.</p>
+  <div class="hero-ctas">
+    <a href="mailto:eyad.emb@gmail.com" class="hero-cta">eyad.emb@gmail.com</a>
+    <a href="https://linkedin.com/in/eyad-bin-mohammed-basabrain" class="hero-cta-outline" target="_blank">LinkedIn</a>
+    <a href="tel:+966564463623" class="hero-cta-outline">+966 56 446 3623</a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Eyad Basabrain · Built with <a href="#">GitHub Pages</a></p>
+</footer>
+
+<div id="cert-modal" class="cert-modal">
+  <div class="cert-modal-content">
+    <button class="cert-modal-close" onclick="closeCertModal()">&times;</button>
+    <div id="cert-modal-body"></div>
+  </div>
+</div>
+
+<script>
+  const API_URL = window.location.origin.includes('localhost') ? 'http://localhost:3001' : '';
+  const uploadedCerts = new Map();
+
+  async function loadUploadedCertifications() {
+    try {
+      const response = await fetch(`${API_URL}/api/certifications`);
+      if (!response.ok) return;
+      const data = await response.json();
+      
+      data.files.forEach(file => {
+        const certName = file.filename.split('_').pop().toLowerCase();
+        uploadedCerts.set(certName, file);
+      });
+      
+      updateCertificateLinks();
+    } catch (error) {
+      console.log('Certifications not available');
+    }
+  }
+
+  function updateCertificateLinks() {
+    document.querySelectorAll('.cert-btn').forEach(btn => {
+      const certCard = btn.closest('.cert-card');
+      const certName = certCard.querySelector('.cert-name').textContent.toLowerCase();
+      const originalHref = btn.getAttribute('href');
+      
+      let hasUploadedFile = false;
+      
+      // Check if we have an uploaded version
+      for (let [key, file] of uploadedCerts) {
+        if (key.includes(certName) || certName.includes(key)) {
+          btn.onclick = (e) => {
+            e.preventDefault();
+            openCertModal(file);
+          };
+          btn.removeAttribute('href');
+          btn.removeAttribute('target');
+          btn.style.cursor = 'pointer';
+          hasUploadedFile = true;
+          break;
+        }
+      }
+      
+      // If no uploaded file, keep original href (certs/ directory files)
+      if (!hasUploadedFile && originalHref) {
+        btn.onclick = null;
+        btn.setAttribute('href', originalHref);
+        btn.setAttribute('target', '_blank');
+        btn.style.cursor = 'pointer';
+      }
+    });
+  }
+
+  function openCertModal(file) {
+    const modal = document.getElementById('cert-modal');
+    const body = document.getElementById('cert-modal-body');
+    const ext = file.filename.split('.').pop().toLowerCase();
+    
+    body.innerHTML = '';
+    const title = document.createElement('h3');
+    title.textContent = file.originalName || file.filename;
+    title.style.color = 'var(--gold-bright)';
+    title.style.marginBottom = '1rem';
+    body.appendChild(title);
+    
+    if (ext === 'pdf') {
+      const iframe = document.createElement('iframe');
+      iframe.src = file.url;
+      iframe.style.width = '100%';
+      iframe.style.height = '600px';
+      iframe.style.border = 'none';
+      body.appendChild(iframe);
+    } else if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
+      const img = document.createElement('img');
+      img.src = file.url;
+      img.style.maxWidth = '100%';
+      img.style.height = 'auto';
+      body.appendChild(img);
+    } else {
+      const link = document.createElement('a');
+      link.href = file.url;
+      link.textContent = 'Download ' + file.originalName;
+      link.target = '_blank';
+      link.style.color = 'var(--gold)';
+      link.style.textDecoration = 'underline';
+      body.appendChild(link);
+    }
+    
+    modal.classList.add('active');
+  }
+
+  function closeCertModal() {
+    document.getElementById('cert-modal').classList.remove('active');
+  }
+
+  window.addEventListener('click', (e) => {
+    const modal = document.getElementById('cert-modal');
+    if (e.target === modal) {
+      closeCertModal();
+    }
+  });
+
+  loadUploadedCertifications();
+</script>
+</body>
+</html>
