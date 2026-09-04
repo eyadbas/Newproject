@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#121411" />
+  <title>Certification Upload Center | Quality Solution</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap');
+    :root { color: #f5f4ef; background: #111211; font-family: 'Manrope', sans-serif; font-synthesis: none; text-rendering: optimizeLegibility; }
+    * { box-sizing: border-box; }
+    body { min-width: 320px; margin: 0; background: #111211; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell { min-height: 100vh; background: radial-gradient(circle at 85% 10%, #28221e 0, #111211 34%); }
+    header, main, footer { width: min(1080px, calc(100% - 48px)); margin: auto; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 30px 0; border-bottom: 1px solid #2b2d2a; }
+    .brand { display: flex; align-items: center; gap: 13px; }
+    .mark { position: relative; width: 32px; height: 32px; border: 1px solid #e63329; transform: rotate(45deg); }
+    .mark::after { position: absolute; inset: 9px; background: #e63329; content: ''; }
+    .brand strong, .brand small { display: block; }
+    .brand strong { font-size: 14px; }
+    .brand small, .mono, .eyebrow, .meta, .file-size { font-family: 'DM Mono', monospace; }
+    .brand small { margin-top: 3px; color: #777a73; font-size: 9px; direction: rtl; }
+    .back { color: #a5a6a0; font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; }
+    .back:hover { color: #e63329; }
+    main { padding: 86px 0 110px; }
+    .intro { display: grid; grid-template-columns: 1fr 300px; align-items: end; gap: 60px; margin-bottom: 55px; }
+    .eyebrow { display: flex; align-items: center; gap: 9px; margin: 0 0 22px; color: #e63329; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .eyebrow::before { width: 26px; height: 1px; background: #e63329; content: ''; }
+    h1 { max-width: 650px; margin: 0; font-size: clamp(42px, 7vw, 76px); line-height: .98; letter-spacing: -.065em; }
+    h1 em { color: #e63329; font-style: normal; }
+    .intro p { margin: 0; color: #a3a59e; font-size: 14px; line-height: 1.8; }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 14px; align-items: start; }
+    .panel { border: 1px solid #30322e; background: #181917; }
+    .dropzone { display: grid; justify-items: center; gap: 13px; min-height: 300px; padding: 60px 30px; border: 1px dashed #555853; outline: 0; text-align: center; transition: border-color .2s, background .2s; }
+    .dropzone:hover, .dropzone:focus-visible, .dropzone.dragging { border-color: #e63329; background: #1e1c1a; }
+    .upload-icon { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid #6e302b; color: #e63329; font-size: 24px; }
+    .dropzone strong { color: #f5f4ef; font-size: 17px; }
+    .dropzone span { color: #777a73; font-family: 'DM Mono', monospace; font-size: 9px; }
+    .dropzone input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+    .choose-files { border: 1px solid #e63329; padding: 11px 18px; color: #fff; background: #e63329; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .choose-files:hover, .choose-files:focus-visible { background: #bd251e; }
+    .queue { padding: 22px; }
+    .queue-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+    .queue-heading h2 { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+    .count { color: #777a73; font: 10px 'DM Mono', monospace; }
+    .file-list { display: grid; gap: 9px; }
+    .empty { padding: 20px 0 4px; color: #777a73; font: 10px 'DM Mono', monospace; }
+    .file { display: flex; align-items: center; gap: 12px; border-top: 1px solid #30322e; padding: 13px 0; }
+    .file-mark { color: #64a77b; font: 12px 'DM Mono', monospace; }
+    .file-info { min-width: 0; flex: 1; }
+    .file-name { overflow: hidden; color: #d4d4cd; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+    .file-size { margin-top: 4px; color: #777a73; font-size: 9px; }
+    .file a, .remove { border: 0; color: #e63329; background: transparent; font: 10px 'DM Mono', monospace; text-transform: uppercase; }
+    .remove { color: #777a73; }
+    .remove:hover { color: #e63329; }
+    .side { padding: 23px; }
+    .side h2 { margin: 0 0 17px; font-size: 16px; }
+    .side p { margin: 0 0 20px; color: #9c9e97; font-size: 12px; line-height: 1.7; }
+    .steps { display: grid; gap: 15px; margin: 0 0 25px; padding: 0; list-style: none; }
+    .steps li { display: grid; grid-template-columns: 24px 1fr; gap: 9px; color: #bdbeb7; font: 10px 'DM Mono', monospace; line-height: 1.5; }
+    .step-no { color: #e63329; }
+    .github-button { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid #e63329; padding: 13px 14px; color: #fff; background: #e63329; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .github-button:hover { background: #bd251e; }
+    .github-button[aria-disabled='true'] { border-color: #4a2b28; color: #777a73; background: #2a211f; cursor: not-allowed; }
+    .hint { margin-top: 13px !important; color: #656861 !important; font: 9px 'DM Mono', monospace !important; }
+    footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid #2b2d2a; padding: 20px 0 28px; color: #656861; font: 9px 'DM Mono', monospace; text-transform: uppercase; }
+    @media (max-width: 760px) { header, main, footer { width: min(100% - 32px, 560px); } header { padding: 22px 0; } main { padding: 58px 0 75px; } .intro, .workspace { grid-template-columns: 1fr; gap: 25px; } .intro { margin-bottom: 34px; } .dropzone { min-height: 250px; padding: 48px 20px; } footer span:last-child { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <a class="brand" href="./">
+        <span class="mark" aria-hidden="true"></span>
+        <span><strong>Quality Solution</strong><small>حلول الجودة الشاملة</small></span>
+      </a>
+      <a class="back" href="./">Back to site</a>
+    </header>
+    <main>
+      <section class="intro">
+        <div><p class="eyebrow">Private workspace / credentials</p><h1>Keep your <em>proof</em> close.</h1></div>
+        <p>Prepare certification files, check the queue, then send them to the repository upload page when everything is ready.</p>
+      </section>
+      <section class="workspace" aria-label="Certification upload workspace">
+        <div>
+          <div class="dropzone panel" id="dropzone" tabindex="0" role="button" aria-controls="file-input" aria-label="Choose certification files from your device or drop them here">
+            <span class="upload-icon" aria-hidden="true">+</span>
+            <strong>Choose certificates from your device</strong>
+            <button class="choose-files" id="choose-files" type="button">Choose files</button>
+            <span>PDF, JPG, or PNG · up to 10 MB each</span>
+            <input id="file-input" type="file" accept="application/pdf,image/jpeg,image/png" multiple />
+          </div>
+          <div class="queue panel">
+            <div class="queue-heading"><h2>Ready to upload</h2><span class="count" id="count">0 files</span></div>
+            <div class="file-list" id="file-list"><div class="empty">No certificates selected yet.</div></div>
+          </div>
+        </div>
+        <aside class="side panel">
+          <h2>Finish in GitHub</h2>
+          <p>Choose files from your device, then save them through the local certification server or hand them off to GitHub for repository storage.</p>
+          <ol class="steps"><li><span class="step-no">01</span><span>Select and review your files here.</span></li><li><span class="step-no">02</span><span>Click upload when the local server is running.</span></li><li><span class="step-no">03</span><span>For the public site, commit files to <strong>public/certifications</strong> in GitHub.</span></li></ol>
+          <a class="github-button" id="github-link" aria-disabled="true" href="https://github.com/eyadbas/Newproject/upload/main/public/certifications" target="_blank" rel="noreferrer">Open GitHub upload <span>↗</span></a>
+          <p class="hint" id="hint">Add at least one valid file to enable the handoff.</p>
+        </aside>
+      </section>
+    </main>
+    <footer><span>© 2026 Quality Solution</span><span>Certification upload center</span></footer>
+  </div>
+  <script>
+    const input = document.getElementById('file-input')
+    const dropzone = document.getElementById('dropzone')
+    const chooseFiles = document.getElementById('choose-files')
+    const list = document.getElementById('file-list')
+    const count = document.getElementById('count')
+    const githubLink = document.getElementById('github-link')
+    const hint = document.getElementById('hint')
+    const files = []
+    const uploadedFiles = new Map()
+    const maxSize = 10 * 1024 * 1024
+    const allowed = ['application/pdf', 'image/jpeg', 'image/png']
+    const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+    const API_URL = isLocalhost ? `${window.location.protocol}//${window.location.hostname}:3001` : ''
+
+    function formatSize(bytes) { return `${(bytes / 1024 / 1024).toFixed(2)} MB` }
+    
+    async function loadUploadedCertifications() {
+      try {
+        const response = await fetch(`${API_URL}/api/certifications`)
+        if (!response.ok) throw new Error('Failed to load certifications')
+        const data = await response.json()
+        uploadedFiles.clear()
+        data.files.forEach(file => {
+          uploadedFiles.set(file.filename, file)
+        })
+        render()
+      } catch (error) {
+        console.error('Error loading certifications:', error)
+      }
+    }
+
+    async function uploadFiles() {
+      if (!files.length) return
+
+      if (!API_URL) {
+        hint.textContent = 'The public GitHub Pages site cannot save files directly. Use the GitHub upload link below, or open this page through the local server.'
+        githubLink.textContent = 'Open GitHub upload ↗'
+        githubLink.href = 'https://github.com/eyadbas/Newproject/upload/main/public/certifications'
+        githubLink.onclick = null
+        return
+      }
+      
+      const formData = new FormData()
+      files.forEach(file => formData.append('certifications', file))
+
+      try {
+        hint.textContent = 'Uploading...'
+        const response = await fetch(`${API_URL}/api/upload`, {
+          method: 'POST',
+          body: formData
+        })
+
+        if (!response.ok) {
+          const error = await response.json()
+          throw new Error(error.error || 'Upload failed')
+        }
+
+        const data = await response.json()
+        data.files.forEach(file => {
+          uploadedFiles.set(file.filename, file)
+        })
+        files.length = 0
+        hint.textContent = `✅ ${data.message}`
+        render()
+      } catch (error) {
+        hint.textContent = `❌ Error: ${error.message}`
+        console.error('Upload error:', error)
+      }
+    }
+
+    async function deleteFile(filename) {
+      if (!confirm('Are you sure you want to delete this file?')) return
+
+      try {
+        const response = await fetch(`${API_URL}/api/certifications/${filename}`, {
+          method: 'DELETE'
+        })
+
+        if (!response.ok) throw new Error('Failed to delete file')
+        
+        uploadedFiles.delete(filename)
+        render()
+      } catch (error) {
+        alert(`Error deleting file: ${error.message}`)
+        console.error('Delete error:', error)
+      }
+    }
+
+    function render() {
+      const pendingCount = files.length
+      const uploadedCount = uploadedFiles.size
+      const totalCount = pendingCount + uploadedCount
+
+      count.textContent = `${totalCount} file${totalCount === 1 ? '' : 's'}`
+      list.innerHTML = ''
+
+      if (!totalCount) {
+        list.innerHTML = '<div class="empty">No certificates selected yet.</div>'
+        githubLink.setAttribute('aria-disabled', 'true')
+        hint.textContent = 'Add at least one valid file to enable upload.'
+        return
+      }
+
+      // Display pending files
+      if (pendingCount > 0) {
+        const pending = document.createElement('div')
+        pending.innerHTML = '<div style="color: #e63329; font: 10px DM Mono, monospace; text-transform: uppercase; margin-bottom: 10px;">Pending upload</div>'
+        list.appendChild(pending)
+
+        files.forEach((file, index) => {
+          const row = document.createElement('article')
+          row.className = 'file'
+          const url = URL.createObjectURL(file)
+          row.innerHTML = `<span class="file-mark" style="color: #e63329;">⏳</span><div class="file-info"><div class="file-name" title="${file.name}">${file.name}</div><div class="file-size">${formatSize(file.size)}</div></div><a href="${url}" target="_blank" rel="noreferrer">View</a><button class="remove" type="button">Remove</button>`
+          row.querySelector('.remove').addEventListener('click', () => { 
+            URL.revokeObjectURL(url)
+            files.splice(index, 1)
+            render() 
+          })
+          list.appendChild(row)
+        })
+      }
+
+      // Display uploaded files
+      if (uploadedFiles.size > 0) {
+        const uploaded = document.createElement('div')
+        uploaded.innerHTML = '<div style="color: #64a77b; font: 10px DM Mono, monospace; text-transform: uppercase; margin: 15px 0 10px;">✓ Saved</div>'
+        list.appendChild(uploaded)
+
+        uploadedFiles.forEach((file, filename) => {
+          const row = document.createElement('article')
+          row.className = 'file'
+          row.innerHTML = `<span class="file-mark" style="color: #64a77b;">✓</span><div class="file-info"><div class="file-name" title="${file.originalName || filename}">${file.originalName || filename}</div><div class="file-size">${formatSize(file.size)}</div></div><a href="${file.url}" target="_blank" rel="noreferrer">View</a><button class="remove" type="button">Delete</button>`
+          row.querySelector('.remove').addEventListener('click', () => deleteFile(filename))
+          list.appendChild(row)
+        })
+      }
+
+      // Update button states
+      if (pendingCount > 0) {
+        githubLink.setAttribute('aria-disabled', 'false')
+        githubLink.textContent = `Upload ${pendingCount} file${pendingCount === 1 ? '' : 's'} ↗`
+        githubLink.onclick = (e) => { e.preventDefault(); uploadFiles() }
+        hint.textContent = 'Click "Upload files" to save them permanently.'
+      } else {
+        githubLink.setAttribute('aria-disabled', uploadedCount === 0)
+        githubLink.textContent = 'Open GitHub upload ↗'
+        githubLink.href = 'https://github.com/eyadbas/Newproject/tree/main/public/certifications'
+        githubLink.onclick = null
+        if (uploadedCount > 0) {
+          hint.textContent = `✅ ${uploadedCount} certification${uploadedCount === 1 ? '' : 's'} saved. Add more or view in GitHub.`
+        } else {
+          hint.textContent = 'Add at least one valid file to enable upload.'
+        }
+      }
+    }
+
+    function addFiles(selected) {
+      selected.forEach(file => {
+        if (!allowed.includes(file.type) || file.size > maxSize) return
+        if (!files.some(existing => existing.name === file.name && existing.size === file.size)) files.push(file)
+      })
+      render()
+    }
+
+    input.addEventListener('change', event => { addFiles(Array.from(event.target.files || [])); input.value = '' })
+    chooseFiles.addEventListener('click', event => { event.stopPropagation(); input.click() })
+    dropzone.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); input.click() } })
+    ;['dragenter', 'dragover'].forEach(type => dropzone.addEventListener(type, event => { event.preventDefault(); dropzone.classList.add('dragging') }))
+    ;['dragleave', 'drop'].forEach(type => dropzone.addEventListener(type, event => { event.preventDefault(); dropzone.classList.remove('dragging') }))
+    dropzone.addEventListener('drop', event => addFiles(Array.from(event.dataTransfer.files || [])))
+    
+    // Load existing certifications on page load
+    loadUploadedCertifications()
+  </script>
+</body>
+</html>
