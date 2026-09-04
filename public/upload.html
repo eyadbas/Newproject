@@ -40,6 +40,8 @@
     .dropzone strong { color: #f5f4ef; font-size: 17px; }
     .dropzone span { color: #777a73; font-family: 'DM Mono', monospace; font-size: 9px; }
     .dropzone input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+    .choose-files { border: 1px solid #e63329; padding: 11px 18px; color: #fff; background: #e63329; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .choose-files:hover, .choose-files:focus-visible { background: #bd251e; }
     .queue { padding: 22px; }
     .queue-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
     .queue-heading h2 { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
@@ -84,12 +86,13 @@
       </section>
       <section class="workspace" aria-label="Certification upload workspace">
         <div>
-          <label class="dropzone panel" id="dropzone" for="file-input" tabindex="0">
+          <div class="dropzone panel" id="dropzone" tabindex="0" role="button" aria-controls="file-input" aria-label="Choose certification files from your device or drop them here">
             <span class="upload-icon" aria-hidden="true">+</span>
-            <strong>Drop certificates here or choose files</strong>
+            <strong>Choose certificates from your device</strong>
+            <button class="choose-files" id="choose-files" type="button">Choose files</button>
             <span>PDF, JPG, or PNG · up to 10 MB each</span>
             <input id="file-input" type="file" accept="application/pdf,image/jpeg,image/png" multiple />
-          </label>
+          </div>
           <div class="queue panel">
             <div class="queue-heading"><h2>Ready to upload</h2><span class="count" id="count">0 files</span></div>
             <div class="file-list" id="file-list"><div class="empty">No certificates selected yet.</div></div>
@@ -97,8 +100,8 @@
         </div>
         <aside class="side panel">
           <h2>Finish in GitHub</h2>
-          <p>This page prepares the files locally. GitHub handles the authenticated repository upload in the next step.</p>
-          <ol class="steps"><li><span class="step-no">01</span><span>Select and review your files here.</span></li><li><span class="step-no">02</span><span>Open the repository upload page.</span></li><li><span class="step-no">03</span><span>Choose the same files and commit them to <strong>public/certifications</strong>.</span></li></ol>
+          <p>Choose files from your device, then save them through the local certification server or hand them off to GitHub for repository storage.</p>
+          <ol class="steps"><li><span class="step-no">01</span><span>Select and review your files here.</span></li><li><span class="step-no">02</span><span>Click upload when the local server is running.</span></li><li><span class="step-no">03</span><span>For the public site, commit files to <strong>public/certifications</strong> in GitHub.</span></li></ol>
           <a class="github-button" id="github-link" aria-disabled="true" href="https://github.com/eyadbas/Newproject/upload/main/public/certifications" target="_blank" rel="noreferrer">Open GitHub upload <span>↗</span></a>
           <p class="hint" id="hint">Add at least one valid file to enable the handoff.</p>
         </aside>
@@ -109,6 +112,7 @@
   <script>
     const input = document.getElementById('file-input')
     const dropzone = document.getElementById('dropzone')
+    const chooseFiles = document.getElementById('choose-files')
     const list = document.getElementById('file-list')
     const count = document.getElementById('count')
     const githubLink = document.getElementById('github-link')
@@ -117,7 +121,8 @@
     const uploadedFiles = new Map()
     const maxSize = 10 * 1024 * 1024
     const allowed = ['application/pdf', 'image/jpeg', 'image/png']
-    const API_URL = window.location.origin.includes('localhost') ? 'http://localhost:3001' : ''
+    const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+    const API_URL = isLocalhost ? `${window.location.protocol}//${window.location.hostname}:3001` : ''
 
     function formatSize(bytes) { return `${(bytes / 1024 / 1024).toFixed(2)} MB` }
     
@@ -138,6 +143,14 @@
 
     async function uploadFiles() {
       if (!files.length) return
+
+      if (!API_URL) {
+        hint.textContent = 'The public GitHub Pages site cannot save files directly. Use the GitHub upload link below, or open this page through the local server.'
+        githubLink.textContent = 'Open GitHub upload ↗'
+        githubLink.href = 'https://github.com/eyadbas/Newproject/upload/main/public/certifications'
+        githubLink.onclick = null
+        return
+      }
       
       const formData = new FormData()
       files.forEach(file => formData.append('certifications', file))
@@ -263,6 +276,7 @@
     }
 
     input.addEventListener('change', event => { addFiles(Array.from(event.target.files || [])); input.value = '' })
+    chooseFiles.addEventListener('click', event => { event.stopPropagation(); input.click() })
     dropzone.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); input.click() } })
     ;['dragenter', 'dragover'].forEach(type => dropzone.addEventListener(type, event => { event.preventDefault(); dropzone.classList.add('dragging') }))
     ;['dragleave', 'drop'].forEach(type => dropzone.addEventListener(type, event => { event.preventDefault(); dropzone.classList.remove('dragging') }))
